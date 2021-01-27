@@ -1,0 +1,84 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.goh</groupId>
+    <artifactId>gcommons</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>gcommons</name>
+    <description>Library of utilities.</description>
+    <packaging>jar</packaging>
+    <url>https://github.com/golivaresh/gcommons</url>
+
+    <!-- Licence -->
+    <licenses>
+        <license>
+            <name>GNU GENERAL PUBLIC LICENSE Version 3</name>
+            <url>https://www.gnu.org/licenses/gpl-3.0.en.html</url>
+        </license>
+    </licenses>
+    
+    <!-- Software Configuration Management -->
+    <scm>
+        <url>https://github.com/golivaresh/gcommons</url>
+        <connection>https://github.com/golivaresh/gcommons.git</connection>
+        <developerConnection>https://github.com/golivaresh/gcommons/tree/developer</developerConnection>
+    </scm>
+    
+    <!-- Developer -->
+    <developers>
+        <developer>
+            <name>Gustavo Olivares Hernández</name>
+            <email>golivaresh.dev@gmail.com</email>
+            <id>golivaresh</id>
+            <organization>golivaresh</organization>
+            <organizationUrl>...</organizationUrl>
+            <roles>
+                <role>Developer</role>
+            </roles>
+            <url>https://github.com/golivaresh</url>
+        </developer>
+    </developers>
+    
+    <!-- Properties -->
+    <properties>
+        <java.version>1.8</java.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
+    </properties>
+    
+    <!-- Build -->
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven-compiler-plugin.version}</version>
+                <configuration>
+                    <source>${maven.compiler.source}</source>
+                    <target>${maven.compiler.target}</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                        <configuration>
+                            <descriptorRefs>jar-with-dependencies</descriptorRefs>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
