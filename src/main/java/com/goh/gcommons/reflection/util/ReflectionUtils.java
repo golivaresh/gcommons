@@ -7,7 +7,6 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-
 /**
  * <strong>ReflectionUtils.java</strong><br>
  * Reflection utilities.<br>
@@ -30,7 +29,6 @@ public final class ReflectionUtils {
      * Constructor of ReflectionUtils.
      */
     private ReflectionUtils() {
-        // TODO Auto-generated constructor stub
     }
 
     /**
