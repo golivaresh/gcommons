@@ -16,14 +16,15 @@ import java.time.temporal.UnsupportedTemporalTypeException;
 import java.util.Date;
 
 import com.goh.gcommons.date.util.DateUtils;
+
 /**
  * 
  * <strong>Periods.java</strong><br>
- * TODO Add class description.<br>
+ * Utility class for date periods.<br>
  * <br>
  * Version control:<br>
  * <ol>
- *      <li>1.0.0 | 04/02/2021 | Gustavo Olivares Hernandez | golivaresh.dev@gmail.com</li>
+ * <li>1.0.0 | 04/02/2021 | Gustavo Olivares Hernandez | golivaresh.dev@gmail.com</li>
  * </ol>
  * 
  * @author golivaresh
@@ -37,45 +38,46 @@ public class Periods {
      * Constructor of Periods.
      */
     private Periods() {
-        // TODO Auto-generated constructor stub
     }
 
     public static final long between(final Date fromDate, final Date toDate, final ChronoUnit period) {
         return getPeriod(fromDate, toDate, period);
     }
-    
-    public static final long between(final LocalDate fromDate, final LocalDate toDate, final ChronoUnit period) {
-        return getPeriod(fromDate, toDate, period);
-    }
-    
-    
+
+//    public static final long between(final LocalDate fromDate, final LocalDate toDate, final ChronoUnit period) {
+//        return getPeriod(fromDate, toDate, period);
+//    }
+
     private static long getPeriod(final Object fromDate, final Object toDate, final ChronoUnit period) {
-        if (fromDate == null || toDate == null) {
-            throw new DateTimeException("The dates are required");
+        if (fromDate == null || toDate == null || period == null) {
+            throw new DateTimeException("All parameters are required");
         }
-        
+
         long value = 0;
         switch (period) {
         case NANOS:
-            value = getTime(fromDate, toDate).toNanos();
+            value = getDuration(fromDate, toDate).toNanos();
             break;
         case MILLIS:
-            value = getTime(fromDate, toDate).toMillis();
+            value = getDuration(fromDate, toDate).toMillis();
             break;
         case SECONDS:
-            value = getTime(fromDate, toDate).getSeconds();
+            value = getDuration(fromDate, toDate).getSeconds();
             break;
         case MINUTES:
-            value = getTime(fromDate, toDate).toMinutes();
+            value = getDuration(fromDate, toDate).toMinutes();
             break;
         case HOURS:
-            value = getTime(fromDate, toDate).toHours();
+            value = getDuration(fromDate, toDate).toHours();
             break;
         case DAYS:
-            value = getTime(fromDate, toDate).toDays();
+            value = getDuration(fromDate, toDate).toDays();
             break;
         case WEEKS:
-            value = getPeriod(fromDate, toDate).toTotalMonths() * 4;
+            long days = getDuration(fromDate, toDate).toDays();
+            if(days >= 7) { // Days
+                value = days / 7;
+            }
             break;
         case MONTHS:
             value = getPeriod(fromDate, toDate).toTotalMonths();
@@ -112,7 +114,7 @@ public class Periods {
         return Period.between(localFrom, localTo);
     }
 
-    private static final Duration getTime(final Object fromDate, final Object toDate) {
+    private static final Duration getDuration(final Object fromDate, final Object toDate) {
         Date dateFrom = null;
         Date dateTo = null;
 
@@ -125,7 +127,7 @@ public class Periods {
         }
         return Duration.between(dateFrom.toInstant(), dateTo.toInstant());
     }
-    
+
     @Deprecated
     public static final long getDaysBetween(final String dateBefore, final String dateAfter) {
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
